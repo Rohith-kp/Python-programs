@@ -1,0 +1,433 @@
+		Jan 2022
+
+Q. List any three image processing Python libraries.
+Ans: three popular image processing libraries in Python:
+
+OpenCV: An open-source computer vision library that provides a comprehensive suite of tools for image and video processing.
+Features:
+
+Image filtering, transformations, and edge detection.
+Face and object detection.
+Supports multiple image formats (JPG, PNG, etc.).
+Works with NumPy for fast operations.
+
+Pillow: A fork of the Python Imaging Library (PIL) that adds support for opening, manipulating, and saving many different image file formats.
+
+scikit-image: A collection of algorithms for image processing built on SciPy, designed for ease of use in scientific and research applications.
+
+Q. List the steps to create a GUI application using Tkinter
+Ans: 1. Import Tkinter Module
+import tkinter as tk
+from tkinter import messagebox
+
+     2. Create the main application window
+root = tk.Tk()
+root.title("My Tkinter App")  # Set window title
+root.geometry("400x300")  # Set window size
+
+     3. Add widgets
+label = tk.Label(root, text="Hello, Tkinter!", font=("Arial", 14))
+label.pack(pady=10)
+
+entry = tk.Entry(root, width=30)
+entry.pack(pady=5)
+
+def on_button_click():
+    text = entry.get()
+    messagebox.showinfo("Message", f"You entered: {text}")
+
+button = tk.Button(root, text="Click Me", command=on_button_click)
+button.pack(pady=10)
+
+     4. Run the main event loop
+root.mainloop()
+
+Q. Explain basic image processing with inbuilt functions in Python. 
+Ans: 
+1. Open and Display an Image
+from PIL import Image
+
+image = Image.open("example.jpg")
+
+image.show()
+2.Resize an Image
+resized_image = image.resize((200, 200))  
+resized_image.show()
+3. Convert Image to Grayscale
+gray_image = image.convert("L")  # Convert to grayscale
+gray_image.show()
+4. Rotate an Image
+rotated_image = image.rotate(45)  # Rotate by 45 degrees
+rotated_image.show()
+
+
+Q. Write Python GUI program to take the birth date and output the age when a
+button is pressed.
+Ans: 
+import tkinter as tk
+from tkinter import messagebox
+from datetime import datetime
+
+def calculate_age():
+    birth_date = entry.get()  
+    try:
+        birth_date = datetime.strptime(birth_date, "%Y-%m-%d")  
+        today = datetime.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        messagebox.showinfo("Age Calculator", f"Your age is {age} years.")
+    except ValueError:
+        messagebox.showerror("Error", "Enter date in YYYY-MM-DD format!")
+
+
+root = tk.Tk()
+root.title("Age Calculator")
+root.geometry("300x200")
+
+label = tk.Label(root, text="Enter Birthdate (YYYY-MM-DD):")
+label.pack(pady=5)
+
+entry = tk.Entry(root, width=20)
+entry.pack(pady=5)
+
+button = tk.Button(root, text="Calculate Age", command=calculate_age)
+button.pack(pady=10)
+
+root.mainloop()
+
+Q. How do you display an image in Python GUI?
+Ans: 
+import tkinter as tk
+from PIL import Image, ImageTk
+
+root = tk.Tk()
+root.title("Display Image in Tkinter")
+
+image = Image.open("sample.jpg")  
+image = image.resize((300, 200))  
+photo = ImageTk.PhotoImage(image)
+
+label = tk.Label(root, image=photo)
+label.pack()
+
+root.mainloop()
+
+		May 2023
+
+Q. What are the advantages of GUI based programs over terminal based programs.
+Ans: 
+GUI based programs:
+*User-friendly, intuitive, and easy to navigate with buttons, menus, and icons.
+*Can display images, graphs, animations, and interactive elements
+*Allows mouse clicks, drag-and-drop, and touch gestures.
+*Easier for non-technical users to operate applications.
+*Can have multiple windows, tabs, and real-time updates.
+*Displays error messages in a user-friendly way, often with suggestions.
+*Offers themes, fonts, colors, and layout adjustments.
+
+Terminal based programs:
+*Requires knowledge of commands, making it less user-friendly for beginners.
+*Limited to text-based output, making complex data harder to interpret.
+*Mostly keyboard-driven, requiring manual typing of commands.
+*Requires command-line knowledge, which can be a barrier for casual users.
+*Usually limited to a single command prompt unless using multiplexers like tmux.
+*Errors appear as text messages, which may be hard to understand.
+*Customization is limited to terminal configurations.
+
+Q. Write a python program to convert a colour image to black and white image.
+Explain the image methods used in it.
+Ans:Using Pillow (PIL):-
+from PIL import Image
+
+image = Image.open("sample.jpg") 
+
+bw_image = image.convert("L")
+
+bw_image.save("bw_image_pil.jpg")
+bw_image.show()
+
+.Image.open("sample.jpg") → Loads the image.
+.convert("L") → Converts the image to grayscale.
+.save() → Saves the converted image.
+.show() → Opens the image using the default viewer.
+
+Q. Write a GUI-based program that allows the user to convert amount in Indian
+Rupees to amount in Euro.
+The interface should have labeled entry fields for these two values. These
+components should be arranged in a grid where the labels occupy the first row
+and the corresponding fields occupy the second row.
+At start-up, the Rupees field should contain 0.0, and the Euro field should contain
+0.0. The third row in the window contains two command buttons, labeled R->E
+and E->R. When the user presses the first button, the program should use the data
+in the Rupee field to compute the amount in Euro, which should then be output
+to the Euro field. The second button should perform the inverse function.
+Ans:
+import tkinter as tk
+
+INR_TO_EURO = 0.011  
+EURO_TO_INR = 1 / INR_TO_EURO  
+def convert_inr_to_euro():
+    try:
+        inr = float(entry_inr.get())  
+        euro = round(inr * INR_TO_EURO, 2)  
+        entry_euro.delete(0, tk.END)
+        entry_euro.insert(0, str(euro))      except ValueError:
+        entry_euro.delete(0, tk.END)
+        entry_euro.insert(0, "Invalid Input")
+
+def convert_euro_to_inr():
+    try:
+        euro = float(entry_euro.get())  
+        inr = round(euro * EURO_TO_INR, 2)  
+        entry_inr.delete(0, tk.END)
+        entry_inr.insert(0, str(inr))  
+    except ValueError:
+        entry_inr.delete(0, tk.END)
+        entry_inr.insert(0, "Invalid Input")
+
+root = tk.Tk()
+root.title("Currency Converter")
+root.geometry("300x150")
+
+tk.Label(root, text="Indian Rupees (INR):").grid(row=0, column=0, padx=5, pady=5)
+tk.Label(root, text="Euro (EUR):").grid(row=0, column=1, padx=5, pady=5)
+
+entry_inr = tk.Entry(root)
+entry_inr.grid(row=1, column=0, padx=5, pady=5)
+entry_inr.insert(0, "0.0")  
+
+entry_euro = tk.Entry(root)
+entry_euro.grid(row=1, column=1, padx=5, pady=5)
+entry_euro.insert(0, "0.0")  
+
+button_inr_to_euro = tk.Button(root, text="R->E", command=convert_inr_to_euro)
+button_inr_to_euro.grid(row=2, column=0, padx=5, pady=10)
+
+button_euro_to_inr = tk.Button(root, text="E->R", command=convert_euro_to_inr)
+button_euro_to_inr.grid(row=2, column=1, padx=5, pady=10)
+
+root.mainloop()
+
+Q. What are the attributes of a window? How the attribute's value can be changed?
+Ans:
+*title: Sets the title of the window.
+	root.title("My App")
+*resizable(): Enables/disables resizing (True/False)
+*configure(): Sets background color and other properties
+*attributes(): Controls transparency, topmost, and fullscreen mode
+*state(): Minimizes, maximizes, or restores the window
+
+
+
+		JUNE 2023
+Q. Illustrate the function of following methods in turtle
+i) turtle.setheading(0) ii)turtle.forward(50) iii) turtle.left(90)
+Ans:
+i)This method sets the turtle's heading (direction) to 0 degrees, which means it will face east (right).
+from turtle umport Turtle
+
+turtle.setheading(0)  
+turtle.forward(50)    
+
+turtle.done()
+
+ii)Moves the turtle forward by 50 pixels in the current direction.
+from turtle import Turtle
+turtle.setheading(90)  
+turtle.forward(50)    
+
+turtle.done()
+
+iii)Turns the turtle left (counterclockwise) by 90 degrees from its current direction.
+from turtle import Turtle
+turtle.forward(50)  # Move forward 50 units
+turtle.left(90)     # Turn left by 90 degrees
+turtle.forward(50)  # Move forward another 50 units
+
+turtle.done()
+
+Q. Write a python function to covert an image to black and white using image
+processing methods.
+Ans:
+from PIL import Image
+
+def convert_to_black_and_white(image_path, output_path):
+    image = Image.open(image_path)
+    bw_image = image.convert("L")
+    bw_image.save(output_path)
+    bw_image.show()
+
+convert_to_black_and_white("color_image.jpg", "bw_image.jpg")
+
+Q. Write a python function to shrink an image by a given factor. The function suppose to builds and returns a new image which is smaller copy of the argument image, by the factor argument.
+Ans:
+from PIL import Image
+
+def shrink_image(image_path, output_path, factor):
+    
+    image = Image.open(image_path)
+    
+    width, height = image.size
+    
+    new_width = width // factor
+    new_height = height // factor
+    
+    resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
+    
+    resized_image.save(output_path)
+    
+    resized_image.show()
+
+shrink_image("original_image.jpg", "shrunken_image.jpg", 2)  # Shrinks image to half
+
+
+		
+		JAN 2024
+Q. Comment on event driven programming.
+Ans:Event-driven programming is a programming paradigm where the flow of execution is determined by events rather than a sequential set of instructions. Events can be triggered by user actions (clicks, key presses), system signals, or messages from other programs.
+Key Features of Event-Driven Programming:-
+1. Event Listeners – Functions that wait for specific events to occur (e.g., button clicks).
+2. Event Handlers – Functions executed in response to an event.
+3. Event Loop – Continuously listens for events and dispatches them to the correct handler.
+4. Asynchronous Execution – Events are handled as they occur, allowing non-blocking operations.
+
+
+Q. Write a Python program to convert a color image to a grayscale image.
+Ans:
+from PIL import Image
+
+def convert_to_grayscale(image_path, output_path):
+   
+    image = Image.open(image_path)
+
+    grayscale_image = image.convert("L")
+
+    grayscale_image.save(output_path)
+
+    grayscale_image.show()
+
+convert_to_grayscale("color_image.jpg", "grayscale_image.jpg")
+
+Q. Discuss on the types of window components and their functions.
+Ans:1. Main Window Components
+Window (Root Window):The main container for the application. All other components are placed inside it.
+Frame:A container that holds other components like buttons, labels, and text fields.
+Dialog Box:A pop-up window used for alerts, confirmations, or input requests.
+Canvas:A drawing area for graphics, shapes, and custom elements.
+2.Input Components
+Button:Executes a function when clicked (e.g., submit, close).
+Entry (Text Field):Allows users to enter a single line of text (e.g., name, email).
+Text Box:Allows multi-line text input (e.g., messages, descriptions).
+Checkbox:Allows users to select multiple options.
+3.Display Components
+Label:Displays static text or images.
+Message Box:Shows alerts, warnings, or confirmation messages.
+Progress Bar:Indicates progress of an operation
+4.Navigation Components
+Menu Bar:Contains menus like File, Edit, View, etc.
+Toolbar:A set of quick-access buttons (e.g., Save, Undo).
+Scroll bar:Allows vertical/horizontal scrolling of content.
+5.Advanced components
+TreeView:Displays hierarchical data (e.g., file explorer).
+ListBox:Shows a list of selectable items.
+Table/Grid (Treeview in Tkinter):Displays structured data like spreadsheets.
+
+
+		MAY 2024
+Q. How can you set the drawing speed of the turtle in the Turtle module? Give an
+example.
+The Turtle module allows you to control the speed of the turtle's movements using the speed() method.
+turtle.speed(value)
+from turtle import Turtle
+t = turtle)
+t.speed(0)
+
+for _ in range(4):
+    t.forward(100)
+    t.right(90)
+
+turtle.done()
+
+Q. List the steps to create a GUI application using Tkinter
+Ans: Step 1: Import Tkinter
+import tkinter as tk
+from tkinter import messagebox
+Step 2: Create the Main Window
+root = tk.Tk()
+root.title("My Tkinter App")
+root.geometry("400x300")  # Set window size
+Step 3: Add Widgets (Labels, Buttons, etc.)
+label = tk.Label(root, text="Welcome to Tkinter!", font=("Arial", 14))
+label.pack(pady=10)
+
+entry = tk.Entry(root)
+entry.pack(pady=5)
+
+def show_message():
+    user_text = entry.get()
+    messagebox.showinfo("Message", f"You entered: {user_text}")
+
+button = tk.Button(root, text="Click Me", command=show_message)
+button.pack(pady=10)
+Step 4: Run the Main Event Loop
+root.mainloop()
+
+Q. Describe the methods and Python modules commonly used for converting a
+color image to a grayscale image.
+Ans:
+from PIL import Image
+
+image = Image.open("sample.jpg")  
+
+gray_image = image.convert("L")
+gray_image.save("bw_image_pil.jpg")
+gray_image.show()
+
+Q. Design a Python GUI program that takes user input for the length and width of a
+rectangle, and when a button is pressed, calculates and displays the area of the
+rectangle.
+Ans:
+import tkinter as tk
+from tkinter import messagebox
+
+def calculate_area():
+    try:
+        length = float(entry_length.get())
+        width = float(entry_width.get())
+        area = length * width
+        label_result.config(text=f"Area: {area} square units")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter valid numbers for length and width.")
+
+root = tk.Tk()
+root.title("Rectangle Area Calculator")
+root.geometry("300x200")
+
+label_length = tk.Label(root, text="Enter Length:")
+label_length.pack(pady=5)
+entry_length = tk.Entry(root)
+entry_length.pack(pady=5)
+
+label_width = tk.Label(root, text="Enter Width:")
+label_width.pack(pady=5)
+entry_width = tk.Entry(root)
+entry_width.pack(pady=5)
+
+button_calculate = tk.Button(root, text="Calculate Area", command=calculate_area)
+button_calculate.pack(pady=10)
+
+label_result = tk.Label(root, text="Area: ")
+label_result.pack(pady=5)
+
+root.mainloop()
+
+Q. How do you display an image with a caption using Python in a graphical
+interface?
+Ans:
+1.Load the image using PIL.Image and ImageTk.PhotoImage
+2.Create a Label widget for the image
+3.Create another Label for the caption
+4.Pack or grid the widgets to arrange them properly
+
+
+
+
