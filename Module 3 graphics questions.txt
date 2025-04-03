@@ -1,0 +1,37 @@
+Q. How to draw a star shape using turtle in Python.
+from turtle import Turtle
+star=Turtle()
+for _ in range(5):
+    star.forward(150) 
+    star.right(144)  
+star.hideturtle()
+
+Q. What are the attributes of a turtle object?
+home() – Moves the turtle to (0, 0) and sets its heading to 0°.
+clear() – Clears the drawing without moving the turtle.
+hideturtle() / showturtle() – Hides or shows the turtle.
+pencolor() – Gets or sets the pen color.
+
+Q. Write a Python program to draw a hexagon and to fill it with red colour. Explain
+the turtle methods used in it.
+from turtle import Turtle
+def drawHexagon(t,length,fill_color):
+	t.color("black", fill_color) 
+        t.begin_fill()
+	for count in range(6):
+		t.forward(length)
+		t.left(60)
+
+	t.end_fill()  
+        t.hideturtle()
+t=Turtle()
+drawHexagon(t,30,"red")
+
+Q. Write a python function to draw a square using turtle graphics
+from turtle import Turtle
+def drawSquare(t,length):
+	for count in range(4):
+		t.forward(length)
+		t.left(90)
+t=Turtle()
+drawSquare(t,30)
