@@ -1,0 +1,374 @@
+		May 2024
+Q. Write a python program to create a list of squares for the numbers from 0 to 9
+using list comprehension.
+Ans: squares=[x**2 for x in range(10)]:
+	print("List of squares:",squares)
+
+Q.Write a user-defined function to generate even numbers between 1 and 25.
+Ans: def generate_even_numbers():
+	return[x for x in range(2,26,2)]
+     even_numbers=generate_even_numbers()
+     printf("Even numbers between 1 and 25 are:{even_numbers}")
+Output:
+	Even numbers between 1 and 25 are: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
+
+Q.Describe the concept of recursive function in Python with suitable example.
+Ans: A recursive function is a function that calls itself to solve a problem. It breaks down a problem into smaller instances of the same problem until a base case is reached.
+
+def factorial(n):
+    if n == 0 or n == 1:  
+        return 1
+    else:
+        return n * factorial(n - 1)  
+num = 5
+print(f"Factorial of {num} is: {factorial(num)}")
+
+Output:
+factorial(5) → 5 × factorial(4)
+factorial(4) → 4 × factorial(3)
+factorial(3) → 3 × factorial(2)
+factorial(2) → 2 × factorial(1)
+factorial(1) → 1 (Base case reached)
+
+Q. Explain how to read numeric values from a file, perform some operations, and
+then write the results back to the file?
+Ans: 
+def process_numbers(file_name):
+    try:
+        with open(file_name, "r") as file:
+            numbers = [int(line.strip()) for line in file] 
+
+        
+        total = sum(numbers)
+        average = total / len(numbers)
+
+        with open(file_name, "a") as file:  
+            file.write("\nResults:\n")
+            file.write(f"Sum: {total}\n")
+            file.write(f"Average: {average}\n")
+
+        print("Processing complete. Results added to the file.")
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+    except ValueError:
+        print("Error: File contains non-numeric values.")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+process_numbers("numbers.txt")
+
+Output:
+10
+20
+30
+40
+50
+
+--- Results ---
+Sum: 150
+Average: 30.0
+Squares: [100, 400, 900, 1600, 2500]
+
+Q. Create a Python program that uses a dictionary to store the names and ages of
+people. Ask the user to enter a name, and the program should display the age of
+that person.
+Ans:
+people = {
+    "Alice": 25,
+    "Bob": 30,
+    "Charlie": 22,
+    "David": 35
+}
+
+name = input("Enter a name to find the age: ")
+
+if name in people:
+    print(f"{name} is {people[name]} years old.")
+else:
+    print(f"Sorry, {name} is not found in the records.")
+
+Output:
+Enter a name to find the age: Alice
+Alice is 25 years old.
+Enter a name to find the age: John
+Sorry, John is not found in the records.
+
+
+		JAN 2024
+Q. Write a Python program to print all palindromes in a line of text.
+Ans:
+def is_palindrome(word):
+    return word == word[::-1]  
+
+def find_palindromes(text):
+    words = text.lower().split()  
+    palindromes = [word for word in words if is_palindrome(word)]
+    return palindromes
+
+text = input("Enter a line of text: ")
+
+palindrome_words = find_palindromes(text)
+
+if palindrome_words:
+    print("Palindromes in the text:", ", ".join(palindrome_words))
+else:
+    print("No palindromes found in the text.")
+
+Output:
+Enter a line of text: Python is awesome!
+No palindromes found in the text.
+
+Q. Illustrate the use of any four dictionary methods.
+Ans:
+1. keys() – Returns all keys in the dictionary
+2. values() – Returns all values in the dictionary
+3. items() – Returns key-value pairs as tuples
+4. get() – Safely retrieves a value without errors
+
+eg:
+student_marks = {
+    "Alice": 85,
+    "Bob": 92,
+    "Charlie": 78,
+    "David": 90
+}
+print("Keys:", student_marks.keys())   #  Output: dict_keys(['Alice', 'Bob', 'Charlie', 'David']
+print("Values:", student_marks.values())   # Output: dict_values([85, 92, 78, 90])
+print("Items:", student_marks.items())  
+# Output: dict_items([('Alice', 85), ('Bob', 92), ('Charlie', 78), ('David', 90)])
+print("Charlie's marks:", student_marks.get("Charlie"))   # Output: 78
+print("Eve's marks:", student_marks.get("Eve", "Not found"))   # Output: Not found
+
+Q. Write a Python program to convert a decimal number to its binary equivalent.
+Ans:
+def decimal_to_binary(n):
+    binary = ""
+    while n > 0:
+        remainder = n % 2  
+        binary = str(remainder) + binary  
+        n = n // 2 
+
+    return binary if binary else "0"  
+
+decimal = int(input("Enter a decimal number: "))
+binary = decimal_to_binary(decimal)
+print(f"Binary equivalent of {decimal} is: {binary}")
+
+Output:
+Enter a decimal number: 25
+Binary equivalent of 25 is: 11001
+
+Q. Write a Python program to read a text file and store the count of occurrences of
+each character in a dictionary.
+Ans:
+def count_characters(filename):
+    char_count = {}  
+
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:  
+                for char in line:  
+                    if char in char_count:
+                        char_count[char] += 1 
+                    else:
+                        char_count[char] = 1  
+
+        return char_count  
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+        return {}
+
+filename = "sample.txt"  
+
+char_frequencies = count_characters(filename)
+
+for char, count in char_frequencies.items():
+    print(f"'{char}': {count}")
+
+Output:
+'h': 1
+'e': 1
+'l': 3
+'o': 2
+' ': 1
+'w': 1
+'r': 1
+'d': 1
+
+		JUNE 2023
+Q. Write the output of following python code :
+
+print(S[::2]) #Output:Cmue
+print(S[::-1]) #Output: retupmoC
+print(S[:]) #Output: Computer
+
+Q. Write a recursive function in python to find GCD of two numbers.
+Ans:
+def gcd(a, b):
+    if b == 0:
+        return a  
+    return gcd(b, a % b)  
+
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
+
+print(f"GCD of {num1} and {num2} is: {gcd(num1, num2)}")
+
+Output:
+GCD of 48 and 18 is: 6
+
+Q. Assume that the variable data refers to the string "Python rules!".Use a string method to perform the following task:
+a. Obtain a list of the words in the string.
+data = "Python rules!"
+words = data.split()
+print(words)
+	Output:['Python', 'rules!']
+
+b. Convert the string to uppercase.
+data = "Python rules!"
+uppercase_data = data.upper()  
+print(uppercase_data)
+        Output: "PYTHON RULES!"
+
+c.Locate the position of the string "rules"
+data = "Python rules!"
+
+position = data.find("rules")  
+print(f"The position of 'rules' is: {position}")
+	Output: 7
+
+d.Replace the exclamation point with a question mark.
+data = "Python rules!"
+modified_data = data.replace("!", "?")  
+print(modified_data)
+	Output: Python rules?
+
+Q. Write a code segment that opens a file for input and prints the number of four-
+letter words in the file
+Ans:
+def count_four_letter_words(filename):
+    try:
+        with open(filename, 'r') as file:
+            text = file.read()
+        words = text.split()
+        four_letter_words = [word for word in words if len(word) == 4]
+        print(f"Number of four-letter words: {len(four_letter_words)}")
+    except FileNotFoundError:
+        print("File not found. Please check the filename and try again.")
+
+filename = "sample.txt"
+
+Output:
+This is a test file with some four-letter words like tree, moon, star, and love.
+Number of four-letter words: 4
+
+Q. Assume that there is a text file named "numbers.txt".Write a python program to
+find the median of list of numbers in the file without using standard function for
+median.
+Ans:
+def find_median(filename):
+    try:
+        with open(filename, 'r') as file:
+            numbers = [int(num) for num in file.read().split()]
+
+        numbers.sort()
+
+        n = len(numbers)
+        if n == 0:
+            print("The file is empty.")
+            return
+
+        if n % 2 == 1:
+            median = numbers[n // 2] 
+        else:
+            median = (numbers[n // 2 - 1] + numbers[n // 2]) / 2  
+
+        print(f"Median: {median}")
+
+    except FileNotFoundError:
+        print("File not found. Please check the filename and try again.")
+    except ValueError:
+        print("The file contains non-numeric values. Please ensure it has only numbers.")
+
+filename = "numbers.txt"  
+find_median(filename)
+
+Output:
+5 15 25 35
+Median: 20.0
+
+		JUNE 2022
+
+Q. Illustrate the use of negative indexing of list with example.
+Ans:
+Negative indexing in Python allows you to access elements in a list from the end, starting with -1 for the last element, -2 for the second-to-last, and so on.
+ example:
+fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+print(fruits[-1]) Output: elderberry (last element)
+print(fruits[-2]) Output: date (second-to-last element)
+print(fruits[-3]) Output: cherry (third-to-last element)
+Q. Python program to count how many times each character appears in a given string and store the count in a dictionary with the character as the key:
+Ans:
+def count_characters(input_string):
+    char_count = {}
+    for char in input_string:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+    return char_count
+input_string = input("Enter a string: ")
+result = count_characters(input_string)
+print("Character count:", result)
+Q. Create a function min_max() that takes a list of numbers as an argument and returns the smallest and largest numbers:
+Ans:
+def min_max(numbers):
+    if not numbers:
+        return None, None
+    smallest = min(numbers)
+    largest = max(numbers)
+    return smallest, largest
+numbers = [int(x) for x in input("Enter numbers separated by spaces: ").split()]
+smallest, largest = min_max(numbers)
+print(f"The smallest number is {smallest}, and the largest number is {largest}.")
+Q. Python program to read n integers into a list and separate the positive and negative numbers into two different lists:
+def separate_numbers(numbers):
+    positive_numbers = []
+    negative_numbers = []
+    for num in numbers:
+        if num >= 0:
+            positive_numbers.append(num)
+        else:
+            negative_numbers.append(num)
+    return positive_numbers, negative_numbers
+numbers = [int(x) for x in input("Enter numbers separated by spaces: ").split()]
+positive_numbers, negative_numbers = separate_numbers(numbers)
+print("Positive numbers:", positive_numbers)
+print("Negative numbers:", negative_numbers)
+Q. Create a dictionary of names and birthdays. Write a Python program that asks the user to enter a name, and the program displays the birthday of that person:
+def get_birthday(name, birthday_dict):
+    if name in birthday_dict:
+        return birthday_dict[name]
+    else:
+        return "Birthday not found."
+birthday_dict = {
+    'Alice': '1990-04-25',
+    'Bob': '1985-11-12',
+    'Charlie': '1992-06-30'
+}
+name = input("Enter a name to find the birthday: ")
+birthday = get_birthday(name, birthday_dict)
+print(f"The birthday of {name} is: {birthday}") 
+
+Q. Write Python code for the following statements
+1) Write the text”PROGRAMMING IN PYTHON” to a file with name code. txt
+   2)then reads the text again and prints it to the screen.
+Ans1) With open(‘code.txt’, ‘w’) as file:
+    File.write(‘PROGRAMMING IN PYTHON’)
+Ans2) With open(‘code.txt’, ‘w’) as file:
+    File.write(‘PROGRAMMING IN PYTHON’)
+With open(‘code.txt’, ‘r’) as file:
+    Content = file.read()
+    print(content)
